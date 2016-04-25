@@ -9,7 +9,7 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 
 /**
- *
+ *oh well
  * @author thor
  */
 @javax.ws.rs.ApplicationPath("webresources")
