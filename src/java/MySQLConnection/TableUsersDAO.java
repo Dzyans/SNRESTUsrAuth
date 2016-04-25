@@ -49,7 +49,7 @@ public class TableUsersDAO {
            if(resultCounter == 1){//possible valid login because of case insensitivity, should be handled in database, alas it is not
                rs.first();
                System.out.println("mulig bruger fundet");
-               
+               //alsdkfh
                System.out.println(" dsf " + rs.getString("login_name") + " " + rs.getString("password") );
                if (rs.getString(1).equals(loginName) && rs.getString(3).equals(password)){
                 System.out.println("Bruger fundet");
