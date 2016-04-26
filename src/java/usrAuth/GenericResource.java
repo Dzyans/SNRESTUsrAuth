@@ -33,7 +33,7 @@ import javax.ws.rs.core.Response;
  *
  * @author thor
  */
-@Path("generic")
+@Path("user")
 public class GenericResource {
     
     @Context
@@ -69,7 +69,7 @@ public class GenericResource {
 return "hurra";
     }
     
-    @Path("login/{usr}/{pw}")
+    @Path("get/{usr}/{pw}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response loginTry(@PathParam("usr") String user, @PathParam("pw")String psw){
