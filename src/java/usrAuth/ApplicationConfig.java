@@ -29,7 +29,9 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(usrAuth.GenericResource.class);
+        resources.add(usrAuth.ChauffeurLoginResource.class);
+        resources.add(usrAuth.MainNodeRegistrationResource.class);
+        resources.add(usrAuth.UserLoginResource.class);
     }
     
 }

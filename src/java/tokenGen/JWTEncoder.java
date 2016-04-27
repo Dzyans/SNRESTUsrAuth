@@ -1,5 +1,5 @@
-package com.firebase.security.token;
-
+package tokenGen;
+//package com.firebase.security.token;
 import org.apache.commons.codec.binary.Base64;
 import org.json.JSONException;
 import org.json.JSONObject;

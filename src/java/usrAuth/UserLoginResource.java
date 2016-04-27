@@ -6,12 +6,8 @@
 package usrAuth;
 
 import MySQLConnection.TableUsersDAO;
-import com.firebase.security.token.TokenGenerator;
-import java.awt.BorderLayout;
+
 import java.lang.annotation.Annotation;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.core.Context;
@@ -20,12 +16,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 
-import javax.ws.rs.OPTIONS;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import tokenGen.TokenBuilder;
+
 
 
 /**
@@ -34,7 +31,7 @@ import javax.ws.rs.core.Response;
  * @author thor
  */
 @Path("user")
-public class GenericResource {
+public class UserLoginResource {
     
     @Context
     private UriInfo context;
@@ -42,7 +39,7 @@ public class GenericResource {
     /**
      * Creates a new instance of GenericResource
      */
-    public GenericResource() {
+    public UserLoginResource() {
     }
     
     /**
@@ -69,7 +66,7 @@ public class GenericResource {
 return "hurra";
     }
     
-    @Path("get/{usr}/{pw}")
+    @Path("login/{usr}/{pw}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response loginTry(@PathParam("usr") String user, @PathParam("pw")String psw){
@@ -94,18 +91,21 @@ return "hurra";
         }else { //when user login is valid
             
             //since user has been verified, a valid firebase token is generated, and send as response
-            TokenGenerator tg = new TokenGenerator("4Y6DIqj0QU7pnn4ws5xfvqUBJvhZC9tYNNHinp8L");
-            HashMap authPayload = new HashMap<String, Object>();
-            authPayload.put("uid", "1");
-            authPayload.put("some", "arbitrary");
-            authPayload.put("data", "here");
-            
-            String tk = tg.createToken(authPayload);
-            JsonObject json = Json.createObjectBuilder().add("User", user).add("token", tk).build();
-            return Response.status(Response.Status.OK).entity(json.toString(),new Annotation[]{}).allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
+//            TokenGenerator tg = new TokenGenerator("4Y6DIqj0QU7pnn4ws5xfvqUBJvhZC9tYNNHinp8L");
+//            HashMap authPayload = new HashMap<String, Object>();
+//            authPayload.put("uid", "1");
+//            authPayload.put("some", "arbitrary");
+//            authPayload.put("data", "here");
+//            
+//            String tk = tg.createToken(authPayload);
+            String token = TokenBuilder.buildToken("pleb", "pleb", "pleb", "pleb");
+            JsonObject json = Json.createObjectBuilder().add("User", user).add("token", token).build();
+            return Response.status(Response.Status.OK).entity(json.toString(),new Annotation[]{})
+//                    .allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
                     .header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
-                    .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();}
+                    .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
+        }
         /*if(!user.equals("Sensor")){
         return Response.status(Response.Status.FORBIDDEN).allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
         .header("Access-Control-Allow-Origin", "*")

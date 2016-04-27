@@ -50,7 +50,7 @@ public class TableUsersDAO {
                rs.first();
                System.out.println("mulig bruger fundet");
                //alsdkfh
-               System.out.println(" dsf " + rs.getString("login_name") + " " + rs.getString("password") );
+               System.out.println(rs.getString("login_name") + " " + rs.getString("password") );
                if (rs.getString(1).equals(loginName) && rs.getString(3).equals(password)){
                 System.out.println("Bruger fundet");
             return 1;
