@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.year;
+
 
 /**
  *
@@ -25,6 +25,8 @@ import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.year;
  */
 public class TableUsersDAO {
     static java.sql.Connection con; 
+    
+    
     public TableUsersDAO() throws Exception{
         con = dbConnector.getDbConnection();     
     }
@@ -32,10 +34,11 @@ public class TableUsersDAO {
     
     public static int LoginCheck(String loginName, String password){
         System.out.println("loginCheck invoked");
+        int response = 0; //variable used for returning the responsecode
         try{
             con = dbConnector.getDbConnection();
             
-            java.sql.Statement stm = con.prepareStatement(password);
+            
             String preparedUserQuery = "select * from users where (login_name = ? AND password = ?)";
             java.sql.PreparedStatement pStm = con.prepareStatement(preparedUserQuery);
             
@@ -53,14 +56,20 @@ public class TableUsersDAO {
                System.out.println(rs.getString("login_name") + " " + rs.getString("password") );
                if (rs.getString(1).equals(loginName) && rs.getString(3).equals(password)){
                 System.out.println("Bruger fundet");
-            return 1;
+            response = dbConnector.OK_RESPONSE;
             }
                
-           } return 2; //user not found
+           } else response = dbConnector.USER_NOT_FOUND; //user not found
+           
+            System.out.println("\nLogin done");
+           System.out.println("closing connection");
+            con.close();
+            System.out.println("Connection closed\n");
+           return response;
         }catch(SQLException e){
-            return 6;//Connection failed 
+            return dbConnector.CONNECTION_ERROR;//Connection failed 
         }catch(ClassNotFoundException e){
-            return 666;//catastrophic failure indicating file corruption on in rest server
+            return dbConnector.FATAL_ERROR;//catastrophic failure indicating file corruption on in rest server
         }
         finally{
             try {

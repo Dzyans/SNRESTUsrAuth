@@ -76,13 +76,13 @@ return "hurra";
         if( returnStatus != 1){//something went wrong
             
             if(returnStatus == 2){// user login invalid
-                return Response.status(Response.Status.FORBIDDEN)
+                return Response.status(Response.Status.BAD_REQUEST)
                         .allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
                     .header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
                 
-            } else return Response.status(Response.Status.SERVICE_UNAVAILABLE)//serverside error
+            } else return Response.serverError()//serverside error
                     .allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
                     .header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")

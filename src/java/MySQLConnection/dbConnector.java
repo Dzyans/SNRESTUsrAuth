@@ -17,6 +17,21 @@ import java.util.logging.Logger;
  */
 public class dbConnector {
     
+    /**
+     * For fatal errors like file corruption
+     */
+    public final static int FATAL_ERROR = 666;
+    
+    public static final int OK_RESPONSE = 1;
+    public static final int USER_NOT_FOUND = 2;
+    public static final int CONNECTION_ERROR = 6;
+    
+    /**
+     * Method for creating database connection to "Studentermaskinen"
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
     public static java.sql.Connection getDbConnection() throws SQLException, ClassNotFoundException{
         
             Class.forName("com.mysql.jdbc.Driver");
