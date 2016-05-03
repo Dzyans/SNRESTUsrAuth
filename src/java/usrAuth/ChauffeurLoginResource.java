@@ -7,11 +7,6 @@ package usrAuth;
 
 import brugerautorisation.transport.soap.Bruger;
 import java.lang.annotation.Annotation;
-import java.math.BigDecimal;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -24,15 +19,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
 import tokenGen.TokenBuilder;
 
 /**
  *
  * @author thor
  */
-@Path("Chauffuer")
+@Path("Chauffeur")
 public class ChauffeurLoginResource {
     
     @Context
@@ -68,9 +61,7 @@ public class ChauffeurLoginResource {
     @Path("login/{login_name}/{password}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response loginChauffoer(@PathParam("login_name") String login_name, @PathParam("password") String password) {
-        
-        
+    public Response loginChauffoer(@PathParam("login_name") String login_name, @PathParam("password") String password) {       
         try{
           String  navn = hentBruger(login_name, password).getBrugernavn();
             System.out.println("user logged in with id:" + login_name);
@@ -89,9 +80,7 @@ public class ChauffeurLoginResource {
                     .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With")
                     .build();
-        }
-        
-        
+        }       
     }
     
     /**
