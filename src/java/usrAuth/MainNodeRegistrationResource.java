@@ -64,9 +64,9 @@ public class MainNodeRegistrationResource {
        try{
          Bruger chffr = hentBruger(id, pw);  
             System.out.println(chffr.getFornavn());
-            TableChauf_Node_regDAO.unregisterChaufAtNode(id, node_id, timestamp);
+           String timestamp_end = TableChauf_Node_regDAO.unregisterChaufAtNode(id, node_id, timestamp);
             
-              JsonObject json = Json.createObjectBuilder().add("time_stamp_unregistered", timestamp).build();
+              JsonObject json = Json.createObjectBuilder().add("chauffeur_unregistered at: ", timestamp_end).build();
             return Response.ok().entity(json.toString(), new Annotation[]{}).
                     allow("POST", "GET", "PUT", "HEAD", "OPTIONS", "UPDATE", "POST").header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
@@ -93,13 +93,14 @@ public class MainNodeRegistrationResource {
             Bruger chffr = hentBruger(id, pw);  
             System.out.println(chffr.getFornavn());
             String timestamp = TableChauf_Node_regDAO.registerChaufAtNode(id, node_id);
-            TableChauf_Node_regDAO.unregisterChaufAtNode(id, node_id, timestamp);
+//            TableChauf_Node_regDAO.unregisterChaufAtNode(id, node_id, timestamp);
               JsonObject json = Json.createObjectBuilder().add("time_stamp", timestamp).build();
             return Response.ok().entity(json.toString(), new Annotation[]{}).
                     allow("POST", "GET", "PUT", "HEAD", "OPTIONS", "UPDATE", "POST").header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } catch(Exception e){
+            e.printStackTrace();
             return Response.status(Response.Status.BAD_REQUEST).allow("POST", "GET", "PUT", "HEAD", "OPTIONS", "UPDATE", "POST").header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();       

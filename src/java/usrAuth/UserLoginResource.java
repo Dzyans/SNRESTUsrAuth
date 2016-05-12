@@ -90,15 +90,7 @@ return "hurra";
             
         }else { //when user login is valid
             
-            //since user has been verified, a valid firebase token is generated, and send as response
-//            TokenGenerator tg = new TokenGenerator("4Y6DIqj0QU7pnn4ws5xfvqUBJvhZC9tYNNHinp8L");
-//            HashMap authPayload = new HashMap<String, Object>();
-//            authPayload.put("uid", "1");
-//            authPayload.put("some", "arbitrary");
-//            authPayload.put("data", "here");
-//            
-//            String tk = tg.createToken(authPayload);
-            String token = TokenBuilder.buildToken("pleb", "pleb", "pleb", "pleb");
+            String token = TokenBuilder.buildToken("", "pleb", "pleb", "pleb");
             JsonObject json = Json.createObjectBuilder().add("User", user).add("token", token).build();
             return Response.status(Response.Status.OK).entity(json.toString(),new Annotation[]{})
 //                    .allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")

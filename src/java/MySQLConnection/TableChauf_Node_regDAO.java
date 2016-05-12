@@ -29,12 +29,11 @@ public class TableChauf_Node_regDAO {
         try {
             con = dbConnector.getDbConnection();
             System.out.println("attempting insert with node " + node_id );
-            String stm = "insert into SensorData.chauffeur_mainnode_reg (timestamp_start, node_id, chauffeur_id) values (?, ?, ?);";
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            long time = System.currentTimeMillis();
-            Timestamp ts = new Timestamp(time);
-            timestamp =ts.toString();
-            System.out.println(timestamp);
+            String stm = "insert into SensorNet.chauffeur_mainnode_reg (timestamp_start, node_id, chauffeur_id) values (?, ?, ?);";
+      
+            timestamp = getTime();            
+           
+            
             PreparedStatement pStm = con.prepareStatement(stm);
             pStm.setString(3, chauffeur_id);
             pStm.setString(2, node_id);
@@ -60,18 +59,20 @@ public class TableChauf_Node_regDAO {
         return timestamp;
     }
     
-    public static int unregisterChaufAtNode(String chauffeur_id, String node_id, String timestamp_start)throws Exception{
+    public static String unregisterChaufAtNode(String chauffeur_id, String node_id, String timestamp_start)throws Exception{
         try{ 
             System.out.println("Unregistering");
             con = dbConnector.getDbConnection();
-            System.out.println("attempting update with timestamp" + timestamp_start );
+            System.out.println("attempting update with timestamp " + timestamp_start );
 //            String stm = "update SensorData.chauffeur_mainnode_reg (timestamp_end = ?) where ( node_id = ? AND chauffeur_id = ? AND timestamp_start = ?);";
-            String stm = "update SensorData.chauffeur_mainnode_reg set timestamp_end = ? where ( node_id = ? AND chauffeur_id = ? AND timestamp_start = ?);";
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            long time = System.currentTimeMillis();
-            Timestamp ts = new Timestamp(time);
-            timestamp =ts.toString();
+            String stm = "update SensorNet.chauffeur_mainnode_reg set timestamp_end = ? where ( node_id = ? AND chauffeur_id = ? AND timestamp_start = ?);";
+//            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//            long time = System.currentTimeMillis();
+//            Timestamp ts = new Timestamp(time);
+            
+            timestamp = getTime();
             System.out.println(timestamp);
+            
             PreparedStatement pStm = con.prepareStatement(stm);
             pStm.setString(4, timestamp_start);
             pStm.setString(3, chauffeur_id);
@@ -79,9 +80,9 @@ public class TableChauf_Node_regDAO {
             pStm.setString(1, timestamp);
             System.out.println(pStm.toString());
             //TODO: change this use of exception throwing
-            if(!pStm.execute())throw new Exception("sensor or timestamp unrecognized");
+            pStm.execute();
         }catch(Exception e){
-           throw new Exception(e.getMessage());
+           throw new Exception("sensor or timestamp unrecognized");
         }finally{
             try {
                 con.close();
@@ -91,6 +92,14 @@ public class TableChauf_Node_regDAO {
             }
         }
     
-    return 1;
+    return timestamp;
     }   
+
+    private static String getTime() {
+       long time = System.currentTimeMillis();            
+            Timestamp ts = new Timestamp(time);
+            String s = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss").format(ts);        
+            System.out.println(timestamp);
+            return s;
+    }
 }

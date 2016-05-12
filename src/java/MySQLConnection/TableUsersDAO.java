@@ -54,7 +54,7 @@ public class TableUsersDAO {
                System.out.println("mulig bruger fundet");
                //alsdkfh
                System.out.println(rs.getString("login_name") + " " + rs.getString("password") );
-               if (rs.getString(1).equals(loginName) && rs.getString(3).equals(password)){
+               if (rs.getString(1).equals(loginName) && rs.getString(2).equals(password)){
                 System.out.println("Bruger fundet");
             response = dbConnector.OK_RESPONSE;
             }

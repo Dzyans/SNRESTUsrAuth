@@ -36,9 +36,12 @@ public class dbConnector {
         
             Class.forName("com.mysql.jdbc.Driver");
             try {
-                java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://ubuntu4.javabog.dk:3306/SensorData", "sensor", "net");
+                System.out.println("someonne is connecting");
+                java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://54.229.188.28:3306/SensorNet", "SensorAdmin", "DistSysNet16");
+//                java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://ubuntu4.javabog.dk:3306/SensorData", "sensor", "net");
             return con;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new SQLException();
         }
            
