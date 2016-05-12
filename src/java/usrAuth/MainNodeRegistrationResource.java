@@ -67,13 +67,14 @@ public class MainNodeRegistrationResource {
            String timestamp_end = TableChauf_Node_regDAO.unregisterChaufAtNode(id, node_id, timestamp);
             
               JsonObject json = Json.createObjectBuilder().add("chauffeur_unregistered at: ", timestamp_end).build();
-            return Response.ok().entity(json.toString(), new Annotation[]{}).
-                    allow("POST", "GET", "PUT", "HEAD", "OPTIONS", "UPDATE", "POST").header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+            return Response.ok().entity(json.toString(), new Annotation[]{})
+//                    .allow("POST", "GET", "PUT", "HEAD", "OPTIONS", "UPDATE", "POST")
+                    .header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "POST, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } catch(Exception e){
             return Response.status(Response.Status.BAD_REQUEST).entity(new String(e.getMessage())).allow("POST", "GET", "PUT", "HEAD", "OPTIONS", "UPDATE", "POST").header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                    .header("Access-Control-Allow-Methods", "POST, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();       
         }
     }
@@ -95,14 +96,15 @@ public class MainNodeRegistrationResource {
             String timestamp = TableChauf_Node_regDAO.registerChaufAtNode(id, node_id);
 //            TableChauf_Node_regDAO.unregisterChaufAtNode(id, node_id, timestamp);
               JsonObject json = Json.createObjectBuilder().add("time_stamp", timestamp).build();
-            return Response.ok().entity(json.toString(), new Annotation[]{}).
-                    allow("POST", "GET", "PUT", "HEAD", "OPTIONS", "UPDATE", "POST").header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+            return Response.ok().entity(json.toString(), new Annotation[]{})
+//                    .allow("POST", "GET", "PUT", "HEAD", "OPTIONS", "UPDATE", "POST").header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "PUT, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         } catch(Exception e){
             e.printStackTrace();
-            return Response.status(Response.Status.BAD_REQUEST).allow("POST", "GET", "PUT", "HEAD", "OPTIONS", "UPDATE", "POST").header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+            return Response.status(Response.Status.BAD_REQUEST)
+//                    .allow("POST", "GET", "PUT", "HEAD", "OPTIONS", "UPDATE", "POST").header("Access-Control-Allow-Origin", "*")
+                    .header("Access-Control-Allow-Methods", "PUT, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();       
         }
     }
@@ -122,13 +124,13 @@ public class MainNodeRegistrationResource {
                 return Response.serverError()
 //                    .allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
                         .header("Access-Control-Allow-Origin", "*")
-                        .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                        .header("Access-Control-Allow-Methods", "GET, OPTIONS")
                         .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
             }else {//status can only be 2 
-                return Response.status(Response.Status.BAD_REQUEST)
+                return Response.status(Response.Status.FORBIDDEN)
 //                    .allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
                         .header("Access-Control-Allow-Origin", "*")
-                        .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                        .header("Access-Control-Allow-Methods", "GET, OPTIONS")
                         .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
             }
            
@@ -141,7 +143,7 @@ public class MainNodeRegistrationResource {
             return Response.status(Response.Status.OK).entity(json.toString(),new Annotation[]{})
 //                    .allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
                     .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                    .header("Access-Control-Allow-Methods", "GET, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
         }
         

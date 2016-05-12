@@ -53,7 +53,11 @@ public class UserLoginResource {
         throw new UnsupportedOperationException();
     }
     
-    
+    /**
+     * testmethod
+     * @return 
+     */
+    @Deprecated
     @Path("xxx")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -77,15 +81,15 @@ return "hurra";
             
             if(returnStatus == 2){// user login invalid
                 return Response.status(Response.Status.BAD_REQUEST)
-                        .allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
+                        .allow("GET", "HEAD", "OPTIONS")
                     .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                    .header("Access-Control-Allow-Methods", "GET, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
                 
             } else return Response.serverError()//serverside error
-                    .allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
+                    .allow("GET", "HEAD", "OPTIONS")
                     .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                    .header("Access-Control-Allow-Methods", "GET, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
             
         }else { //when user login is valid
@@ -95,28 +99,9 @@ return "hurra";
             return Response.status(Response.Status.OK).entity(json.toString(),new Annotation[]{})
 //                    .allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
                     .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                    .header("Access-Control-Allow-Methods", "GET, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-        }
-        /*if(!user.equals("Sensor")){
-        return Response.status(Response.Status.FORBIDDEN).allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
-        .header("Access-Control-Allow-Origin", "*")
-        .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
-        .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-        }else{
-        
-        TokenGenerator tg = new TokenGenerator("4Y6DIqj0QU7pnn4ws5xfvqUBJvhZC9tYNNHinp8L");
-        HashMap authPayload = new HashMap<String, Object>();
-        authPayload.put("uid", "1");
-        authPayload.put("some", "arbitrary");
-        authPayload.put("data", "here");
-        
-        String tk = tg.createToken(authPayload);
-        JsonObject json = Json.createObjectBuilder().add("User", user).add("token", tk).build();
-        return Response.ok().entity(json.toString(),new Annotation[]{}).allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
-        .header("Access-Control-Allow-Origin", "*")
-        .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
-        .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();}}*/
+        }       
     }
     
     
