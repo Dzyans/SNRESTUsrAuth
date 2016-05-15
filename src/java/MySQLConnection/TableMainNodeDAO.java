@@ -50,7 +50,7 @@ public class TableMainNodeDAO {
             response = dbConnector.OK_RESPONSE;
             
                }
-            }else response = dbConnector.USER_NOT_FOUND;
+            }else response = dbConnector.INVALID_LOGIN;
             //-----------------------------------------------------------------------------
             
 //            System.out.println("\nnode registration done");

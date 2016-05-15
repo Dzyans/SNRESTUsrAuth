@@ -23,11 +23,11 @@ public class dbConnector {
     public final static int FATAL_ERROR = 666;
     
     public static final int OK_RESPONSE = 1;
-    public static final int USER_NOT_FOUND = 2;
+    public static final int INVALID_LOGIN = 2;
     public static final int CONNECTION_ERROR = 6;
     
     /**
-     * Method for creating database connection to "Studentermaskinen"
+     * Method for creating database connection to "Amazon aws or Studentermaskinen"
      * @return
      * @throws SQLException
      * @throws ClassNotFoundException 
@@ -38,11 +38,16 @@ public class dbConnector {
             try {
                 System.out.println("someonne is connecting");
                 java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://54.229.188.28:3306/SensorNet", "SensorAdmin", "DistSysNet16");
-//                java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://ubuntu4.javabog.dk:3306/SensorData", "sensor", "net");
             return con;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new SQLException();
+                System.out.println("attempting to connect to backup database @ ubuntu4.javabog.dk:3306");
+            try{
+                java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://ubuntu4.javabog.dk:3306/SensorData", "sensor", "net");
+                 return con;
+            }catch(Exception ex){               
+                throw new SQLException();
+            }
         }
            
           //  Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/LocalSensor", "root", "Roar");

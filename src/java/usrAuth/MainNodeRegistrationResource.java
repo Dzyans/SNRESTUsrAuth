@@ -56,7 +56,7 @@ public class MainNodeRegistrationResource {
     }
     
     
-    @Path("/unRegCauffeurAtNode/{chauffeur_id}/{chauffeur_pw}/{node_id}/{timestamp}")
+    @Path("/unRegChauffeurAtNode/{chauffeur_id}/{chauffeur_pw}/{node_id}/{timestamp}")
     @POST
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)

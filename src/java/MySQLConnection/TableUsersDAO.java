@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.year;
 
 
 /**
@@ -54,19 +55,20 @@ public class TableUsersDAO {
                System.out.println("mulig bruger fundet");
                //alsdkfh
                System.out.println(rs.getString("login_name") + " " + rs.getString("password") );
-               if (rs.getString(1).equals(loginName) && rs.getString(2).equals(password)){
+               if (rs.getString("login_name").equals(loginName) && rs.getString("password").equals(password)){
                 System.out.println("Bruger fundet");
             response = dbConnector.OK_RESPONSE;
-            }
+            } else response = dbConnector.INVALID_LOGIN;
                
-           } else response = dbConnector.USER_NOT_FOUND; //user not found
+           } else response = dbConnector.INVALID_LOGIN; //user not found
            
-            System.out.println("\nLogin done");
+            System.out.println("\nLogin done. Response: " + response);
            System.out.println("closing connection");
             con.close();
             System.out.println("Connection closed\n");
            return response;
         }catch(SQLException e){
+            System.out.println("connection error catched");
             return dbConnector.CONNECTION_ERROR;//Connection failed 
         }catch(ClassNotFoundException e){
             return dbConnector.FATAL_ERROR;//catastrophic failure indicating file corruption on in rest server
