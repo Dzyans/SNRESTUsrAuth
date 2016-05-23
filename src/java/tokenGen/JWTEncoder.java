@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 
 /**
  * JWT encoder.
- *
+ * This class is 3'rd part
  * @author vikrum
  */
 public class JWTEncoder {

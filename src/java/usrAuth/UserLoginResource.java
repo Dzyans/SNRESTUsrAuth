@@ -94,10 +94,9 @@ return "hurra";
             
         }else { //when user login is valid
             
-            String token = TokenBuilder.buildToken("", "pleb", "pleb", "pleb");
+            String token = TokenBuilder.buildToken(user, "valid", "2", "sx1");
             JsonObject json = Json.createObjectBuilder().add("User", user).add("token", token).build();
             return Response.status(Response.Status.OK).entity(json.toString(),new Annotation[]{})
-//                    .allow("POST", "GET", "HEAD", "OPTIONS", "UPDATE", "POST")
                     .header("Access-Control-Allow-Origin", "*")
                     .header("Access-Control-Allow-Methods", "GET, OPTIONS")
                     .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();

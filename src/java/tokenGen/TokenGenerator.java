@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * Firebase JWT token generator.
- *
+ * This class is 3'rd part
  * @author vikrum
  */
 public class TokenGenerator {

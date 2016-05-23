@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * Token options.
- *
+ * This class is 3'rd part
  * @author vikrum
  */
 public class TokenOptions {
